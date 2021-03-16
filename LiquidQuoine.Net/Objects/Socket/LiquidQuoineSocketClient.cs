@@ -134,7 +134,7 @@ TODO: {"event":"pusher:subscribe","data":{"channel":"product_51_resolution_3600_
             foreach(var fundingCurrency in fundingCurrensies)
             {
                 var channel = _pusherClient.Subscribe(FillPathParameter(UserAccountOrdersEndpoint, fundingCurrency));
-                channel.Bind("update", (dynamic data) =>
+                channel.Bind("updated", (dynamic data) =>
                 {
                     string t = Convert.ToString(data);
                     LiquidQuoinePlacedOrder deserialized = Deserialize<LiquidQuoinePlacedOrder>(t,false).Data;
@@ -152,7 +152,7 @@ TODO: {"event":"pusher:subscribe","data":{"channel":"product_51_resolution_3600_
             if (authProvider == null)
                 throw new Exception("for subscribing to private channels you must provide api credentials");
             var _myChannel = _pusherClient.Subscribe(FillPathParameter(UserAccountExecutionsEndpoint, symbol));
-            _myChannel.Bind("update", (dynamic data) =>
+            _myChannel.Bind("updated", (dynamic data) =>
             {
                 string t = Convert.ToString(data);
                 LiquidQuoineExecution deserialized = Deserialize<LiquidQuoineExecution>(t).Data;
